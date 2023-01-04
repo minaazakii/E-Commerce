@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\SettingUpdateRequest;
 use App\Models\Setting;
+use App\Utils\ImageUpload;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Image;
@@ -19,13 +20,15 @@ class SettingController extends Controller
     public function update(SettingUpdateRequest $request, Setting $setting)
     {
         $setting->update($request->validated());
-        $logoName = time() . '.' . $request->logo->extension();
-        $logo = Image::make($request->logo->path());
-        $logo->fit(200, 200, function ($constrain) {
-            $constrain->upsize();
-        })->stream();
+        if ($request->has('logo'))
+        {
+            $setting->update(['logo' => ImageUpload::uploadImage($request->logo, 200, 200)]);
+        }
+        if($request->hasFile('favicon'))
+        {
+            $setting->update(['favicon' =>ImageUpload::uploadImage($request->favicon) ]);
+        }
 
-        Storage::disk('public')->put($logoName, $logo);
         return back();
     }
 }
