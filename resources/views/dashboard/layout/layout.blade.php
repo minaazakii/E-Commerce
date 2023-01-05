@@ -44,6 +44,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard') }}/assets/css/style.css">
 
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard') }}/dropify.css">
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
 </head>
 
 <body class="rtl">
@@ -52,7 +54,7 @@
     <div class="page-wrapper">
 
         <!-- Page Header Start-->
-        <div class="page-main-header">
+        <div class="page-main-header mb-5">
             <div class="main-header-right row">
                 <div class="main-header-left d-lg-none w-auto">
                     <div class="logo-wrapper">
@@ -294,10 +296,13 @@
     <script src="{{ asset('dashboard') }}/assets/js/admin-script.js"></script>
 
     <script src="{{ asset('dashboard') }}/dropify.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 
     <script>
         $('.dropify').dropify();
+
     </script>
+    @stack('script')
 </body>
 
 </html>

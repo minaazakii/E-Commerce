@@ -22,53 +22,25 @@
             <li>
                 <a class="sidebar-header" href="index.html">
                     <i data-feather="home"></i>
-                    <span>Dashboard</span>
+                    <span>لوحه التحكم</span>
                 </a>
             </li>
 
             <li>
                 <a class="sidebar-header" href="javascript:void(0)">
                     <i data-feather="box"></i>
-                    <span>Products</span>
+                    <span>الاقسام</span>
                     <i class="fa fa-angle-right pull-right"></i>
                 </a>
 
                 <ul class="sidebar-submenu">
                     <li>
-                        <a href="javascript:void(0)">
+                        <a href="{{ route('dashboard.category.index') }}">
                             <i class="fa fa-circle"></i>
-                            <span>Physical</span>
+                            <span>الاقسام</span>
                             <i class="fa fa-angle-right pull-right"></i>
                         </a>
 
-                        <ul class="sidebar-submenu">
-                            <li>
-                                <a href="category.html">
-                                    <i class="fa fa-circle"></i>Category
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="category-sub.html">
-                                    <i class="fa fa-circle"></i>Sub Category</a>
-                            </li>
-
-                            <li>
-                                <a href="product-list.html">
-                                    <i class="fa fa-circle"></i>Product List</a>
-                            </li>
-
-                            <li>
-                                <a href="product-detail.html">
-                                    <i class="fa fa-circle"></i>Product Detail</a>
-                            </li>
-
-                            <li>
-                                <a href="add-product.html">
-                                    <i class="fa fa-circle"></i>Add Product
-                                </a>
-                            </li>
-                        </ul>
                     </li>
 
                     <li>
@@ -78,38 +50,6 @@
                             <i class="fa fa-angle-right pull-right"></i>
                         </a>
 
-                        <ul class="sidebar-submenu">
-                            <li>
-                                <a href="category-digital.html">
-                                    <i class="fa fa-circle"></i>Category
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="category-digitalsub.html">
-                                    <i class="fa fa-circle"></i>Sub Category
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="product-listdigital.html">
-                                    <i class="fa fa-circle"></i>Product List
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="add-digital-product.html">
-                                    <i class="fa fa-circle"></i>Add Product
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <a href="product-review.html">
-                            <i class="fa fa-circle"></i>
-                            <span>product Review</span>
-                        </a>
                     </li>
                 </ul>
             </li>
@@ -117,7 +57,7 @@
             <li>
                 <a class="sidebar-header" href="javascript:void(0)">
                     <i data-feather="archive"></i>
-                    <span>Orders</span>
+                    <span>المنتجات</span>
                     <i class="fa fa-angle-right pull-right"></i>
                 </a>
 
@@ -148,7 +88,7 @@
             <li>
                 <a class="sidebar-header" href="javascript:void(0)">
                     <i data-feather="dollar-sign"></i>
-                    <span>Sales</span>
+                    <span>الطلبات</span>
                     <i class="fa fa-angle-right pull-right"></i>
                 </a>
                 <ul class="sidebar-submenu">
@@ -168,7 +108,7 @@
             <li>
                 <a class="sidebar-header" href="javascript:void(0)">
                     <i data-feather="tag"></i>
-                    <span>Coupons</span>
+                    <span>الكويونات</span>
                     <i class="fa fa-angle-right pull-right"></i>
                 </a>
                 <ul class="sidebar-submenu">
@@ -235,7 +175,7 @@
             <li>
                 <a class="sidebar-header" href="javascript:void(0)">
                     <i data-feather="user-plus"></i>
-                    <span>Users</span>
+                    <span>اعضاء الموقع</span>
                     <i class="fa fa-angle-right pull-right"></i>
                 </a>
                 <ul class="sidebar-submenu">

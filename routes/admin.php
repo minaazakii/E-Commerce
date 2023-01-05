@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Dashboard\SettingController;
+use App\Http\Controllers\Dashboard\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +21,12 @@ Route::GET('/dashboard', function () {
 })->name('dashboard.settings.index');
 
 Route::PUT('/setting/update/{setting}',[SettingController::class,'update'])->name('dashboard.settings.update');
+
+
+
+//Categories
+
+Route::GET('category/index', [CategoryController::class, 'index'])->name('dashboard.category.index');
+Route::GET('category/edit', [CategoryController::class, 'edit'])->name('dashboard.category.edit');
+Route::DELETE('category/delete', [CategoryController::class, 'delete'])->name('dashboard.category.delete');
+Route::GET('category/ajax', [CategoryController::class, 'getAll'])->name('dashboard.category.ajaxCategory');
