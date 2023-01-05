@@ -20,13 +20,13 @@ class SettingController extends Controller
     public function update(SettingUpdateRequest $request, Setting $setting)
     {
         $setting->update($request->validated());
-        if ($request->has('logo'))
-        {
-            $setting->update(['logo' => ImageUpload::uploadImage($request->logo, 200, 200)]);
+        if($request->has('logo')){
+            $logo = ImageUpload::uploadImage($request->logo , null , null , 'logo/');
+            $setting->update(['logo' => $logo]);
         }
-        if($request->hasFile('favicon'))
-        {
-            $setting->update(['favicon' =>ImageUpload::uploadImage($request->favicon) ]);
+        if($request->has('favicon')){
+            $favicon = ImageUpload::uploadImage($request->favicon , 32 , 32 , 'logo/');
+            $setting->update(['favicon' => $favicon]);
         }
 
         return back();

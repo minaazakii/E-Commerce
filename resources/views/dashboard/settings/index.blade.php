@@ -23,7 +23,9 @@
 
                                 <div class="input-group mb-3">
                                     <label class="input-group-text" for="inputGroupFile01">لوجو الموقع</label>
-                                    <input type="file" name="logo" class="form-control border-0"value="{{ $setting->logo }}" id="inputGroupFile01">
+                                    <input type="file" name="logo" class="form-control border-0 dropify"value="{{ $setting->logo }}" id="inputGroupFile01"
+                                    data-default-file="{{ asset($setting->logo) }}">
+
                                 </div>
 
                                 <div class="form-control border-0">
@@ -32,8 +34,9 @@
                                 </div>
 
                                 <div class="input-group mb-3">
-                                    <label class="input-group-text" for="inputGroupFile01">لوجو مصغر</label>
-                                    <input type="file" name="favicon" class="form-control border-0"value="{{ $setting->favicon }}" id="inputGroupFile01">
+                                    <label class="input-group-text " for="inputGroupFile01">لوجو مصغر</label>
+                                    <input type="file" name="favicon" class="form-control border-0 dropify"value="{{ $setting->favicon }}" id="inputGroupFile01"
+                                    data-default-file="{{ asset($setting->favicon) }}">
                                 </div>
 
                                 <div class="mb-3">

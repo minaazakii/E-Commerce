@@ -1,26 +1,25 @@
 <?php
 
 namespace App\Utils;
+
+use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
-use Image;
 
 class ImageUpload
 {
-    public static function uploadImage($file,$height = null,$width=null)
-    {
 
-        $imageName = time() . '.' . $file->extension();
-        $image = Image::make($file->path());
-        [$defaultWidth,$defaultHeight] = getimagesize($file);
-        $width = $width ?? $defaultWidth;
-        $height = $height?? $defaultHeight;
-        $image->fit($height, $width, function ($constrain) {
-            $constrain->upsize();
+
+    public static function uploadImage($request,$height=null,$width=null,$path=null){
+        $imagename =Str::uuid().date('Y-m-d') . '.' . $request->extension();
+        [$widthDefault, $heightDefault] = getimagesize($request);
+        $height = $height ?? $heightDefault;
+        $width = $width ?? $widthDefault;
+        $image = Image::make($request->path());
+        $image->fit($width, $height, function ($constraint) {
+            $constraint->upsize();
         })->stream();
-
-        Storage::disk('public')->put($imageName, $image);
-        return 'public/'. $imageName;
+        Storage::disk('images')->put($path.$imagename, $image);
+        return $path.$imagename;
     }
 }
-
-
