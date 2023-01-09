@@ -9,6 +9,11 @@
                 اضافه قسم
             </button>
         </div>
+        @if($errors->any())
+        @foreach ($errors->all() as $error )
+            <p class="alert-danger">{{ $error }}</p>
+        @endforeach
+        @endif
             <!--store Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1"  aria-hidden="true">
                 <div class="modal-dialog">
@@ -22,14 +27,15 @@
                             <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <form>
+                                    <form action="{{ route('dashboard.category.store') }}" method="POST" enctype="multipart/form-data">
+                                        @csrf
                                         <div class="mb-3">
                                           <label class="form-label">اسم</label>
-                                          <input type="email" class="form-control rounded">
+                                          <input name="name" type="text" class="form-control rounded">
                                         </div>
                                         <div class="mb-3 ">
-                                            <select class="form-select rounded mt-3" aria-label="Default select example">
-                                                <option selected>قسم</option>
+                                            <select name="parent_id" class="form-select rounded mt-3" aria-label="Default select example">
+                                                <option selected disabled>قسم</option>
                                                 @foreach($mainCategories as $category)
                                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                                                 @endforeach
@@ -38,7 +44,7 @@
                                         </div>
                                         <div class="">
                                             <label for="formFile" class="form-label">صوره</label>
-                                            <input class="form-control dropify rounded" type="file" id="formFile">
+                                            <input name="image" class="form-control dropify rounded" type="file" id="formFile">
                                           </div>
                                 </div>
 
@@ -48,41 +54,38 @@
                     </div>
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                    </form>
+                </div>
+                </div>
+            </div>
+
+
+
+        <!-- delete Modal -->
+            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <form action="{{ route("dashboard.category.delete") }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    متأكد من مسح؟؟
+                    <input type="hidden" name="id" id="id">
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اغلاق</button>
+                    <button type="submit" class="btn btn-primary">حذف</button>
                     </div>
                 </form>
                 </div>
                 </div>
             </div>
-
-                    <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal">
-            Launch demo modal
-        </button>
-
-        <!-- delete Modal -->
-        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <form action="{{ route("dashboard.category.delete") }}" method="POST">
-                @csrf
-                @method('DELETE')
-            <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                متأكد من مسح؟؟
-                <input type="hidden" name="id" id="id">
-                </div>
-                <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اغلاق</button>
-                <button type="submit" class="btn btn-primary">حذف</button>
-                </div>
-            </form>
-            </div>
-            </div>
-        </div>
 
 
         <div class="col-12">
@@ -92,7 +95,7 @@
                     <thead>
                         <tr>
                             <th scope="col">name</th>
-                            <th scope="col">image</th>
+                            <th scope="col">قسم</th>
                             <th scope="col">action</th>
                             <th scope="col">action</th>
                         </tr>
@@ -123,8 +126,8 @@
                     name: 'name'
                 },
                 {
-                    data:'image',
-                    name:'image'
+                    data:'parent',
+                    name:'parent'
                 },
                 {
                     data:'action',

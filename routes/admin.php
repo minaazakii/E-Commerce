@@ -27,6 +27,8 @@ Route::PUT('/setting/update/{setting}',[SettingController::class,'update'])->nam
 //Categories
 
 Route::GET('category/index', [CategoryController::class, 'index'])->name('dashboard.category.index');
-Route::GET('category/edit', [CategoryController::class, 'edit'])->name('dashboard.category.edit');
+Route::GET('category/edit/{id}', [CategoryController::class, 'edit'])->name('dashboard.category.edit');
+Route::PUT('category/update/{id}', [CategoryController::class, 'update'])->name('dashboard.category.update');
 Route::DELETE('category/delete', [CategoryController::class, 'delete'])->name('dashboard.category.delete');
+Route::POST('category/store', [CategoryController::class, 'store'])->name('dashboard.category.store');
 Route::GET('category/ajax', [CategoryController::class, 'getAll'])->name('dashboard.category.ajaxCategory');

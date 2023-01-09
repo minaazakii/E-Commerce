@@ -3,25 +3,42 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Dashboard\CategoryStoreRequest;
+use App\Http\Requests\Dashboard\CategoryUpdateRequest;
 use App\Models\Category;
+use App\Services\CategoryService;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
 class CategoryController extends Controller
 {
+    private $categoryService;
+    public function __construct(CategoryService $categoryService)
+    {
+        $this->categoryService = $categoryService;
+    }
     public function index()
     {
-        $mainCategories = Category::where('parent_id', null)->orWhere('parent_id', 0)->get();
-        $categories = Category::paginate(5);
+        $mainCategories = $this->categoryService->getMainCategories();
         return view('dashboard.categories.index',
         [
             'mainCategories'=>$mainCategories,
-            'categories'=>$categories
         ]);
     }
-    public function edit()
+    public function store(CategoryStoreRequest $request)
     {
-        return view('dashboard.categories.edit');
+        $this->categoryService->store($request->validated());
+        return back();
+    }
+    public function edit($id)
+    {
+        $category = $this->categoryService->getCatById($id,true);
+        $mainCategories = $this->categoryService->getMainCategories();
+        return view('dashboard.categories.edit',
+        [
+            'category'=>$category,
+            'mainCategories'=>$mainCategories,
+        ]);
     }
     public function delete(Request $request)
     {
@@ -30,23 +47,14 @@ class CategoryController extends Controller
     }
     public function getAll()
     {
-        // route('dashboard.categories.delete', $row->id)
-        $query = Category::select('*')->with('parent');
-        return DataTables::of($query)
-            ->addIndexColumn()
-            ->addColumn('action', function ($row) {
-                return $btn = '
-                 <a href="' . route('dashboard.category.edit', $row->id) . '" class="btn btn-warning">Edit</a>
-
-                ';
-            })
-            ->addColumn('action2', function ($row) {
-                return $btn = ' <button  data-bs-toggle="modal" id="deleteBtn" data-id="' . $row->id . '" class="btn btn-danger" data-bs-target="#deleteModal">Delete</button>';
-            })
-            ->addColumn('parent', function ($row) {
-                return ($row->parent == 0) ? "قسم رئيسي" : $row->parents->name;
-            })
-            ->rawColumns(['parent','action','action2'])
-            ->make(true);
+        return $this->categoryService->datatable();
     }
+    public function update(CategoryUpdateRequest $request,$id)
+    {
+
+        $this->categoryService->update($request->validated(),$id);
+        return redirect()->route('dashboard.category.edit',$id);
+
+    }
+
 }
