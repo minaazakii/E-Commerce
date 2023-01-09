@@ -21,7 +21,7 @@ class CategoryService
     public function datatable()
     {
          // route('dashboard.categories.delete', $row->id)
-         $query = Category::select('*')->with('parent');
+         $query = $this->categoryRepo->baseQuery(['parent']);
          return DataTables::of($query)
              ->addIndexColumn()
              ->addColumn('action', function ($row) {

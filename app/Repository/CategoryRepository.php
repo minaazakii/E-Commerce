@@ -12,7 +12,7 @@ class CategoryRepository
     }
     public function getMainCategories()
     {
-        return $this->category->getMainCategories();
+        return $this->category->where('parent_id', 0)->get();
     }
     public function store($params)
     {
@@ -33,5 +33,10 @@ class CategoryRepository
     public function update($category,$params)
     {
         return $category->update($params);
+    }
+    public function baseQuery($relation=[])
+    {
+        $query = $this->category->select('*')->with($relation);
+        return $query;
     }
 }
