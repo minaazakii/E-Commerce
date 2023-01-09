@@ -2,11 +2,17 @@
 
 namespace App\Services;
 use App\Models\Category;
+use App\Repository\CategoryRepository;
 use App\Utils\ImageUpload;
 use Yajra\DataTables\DataTables;
 
 class CategoryService
 {
+    public $categoryRepo;
+    public function __construct(CategoryRepository $repo)
+    {
+        $this->categoryRepo = $repo;
+    }
     public function getMainCategories()
     {
         return Category::where('parent_id', null)->orWhere('parent_id', 0)->get();
@@ -44,29 +50,23 @@ class CategoryService
             $param['image'] = ImageUpload::uploadImage($param['image']);
         }
 
-        return Category::create($param);
+        return $this->categoryRepo->store($param);
     }
 
-    public function getCatById($id,$childrenCount = false)
+    public function getCatById($id,$childrenCount=false)
     {
-       $query = Category::where('id',$id);
-
-       if($childrenCount)
-       {
-        $query->withCount('child');
-       }
-       return $query->firstOrFail();
+       return $this->categoryRepo->getCatById($id,$childrenCount);
     }
 
     public function update($param,$id)
     {
-        $category = $this->getCatById($id);
+        $category = $this->categoryRepo->getCatById($id);
         if(isset($param['image']))
         {
             $param['image'] = ImageUpload::uploadImage($param['image']);
         }
 
-        return $category->update($param);
+        return $this->categoryRepo->update($category,$param);
     }
 
 }

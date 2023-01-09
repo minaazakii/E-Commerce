@@ -20,6 +20,7 @@
                     <select name="parent_id" class="form-select rounded mt-3" aria-label="Default select example">
                         <option selected disabled>قسم</option>
                         @foreach ($mainCategories as $mainCat)
+                        @continue($mainCat->id == $category->id)
                         <option value="{{ $mainCat->id }}">{{ $mainCat->name }}</option>
                         @endforeach
                       </select>

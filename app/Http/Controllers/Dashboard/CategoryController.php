@@ -51,7 +51,7 @@ class CategoryController extends Controller
     }
     public function update(CategoryUpdateRequest $request,$id)
     {
-
+        
         $this->categoryService->update($request->validated(),$id);
         return redirect()->route('dashboard.category.edit',$id);
 
