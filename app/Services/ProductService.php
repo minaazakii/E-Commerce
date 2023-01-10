@@ -32,6 +32,10 @@ class ProductService
         }
         $product = $this->productRepo->store($param);
 
+        if(isset($param['images']))
+        {
+           $this->productRepo->addImages($param['images'], $product['id']);
+        }
 
     }
     public function update($id, $param)

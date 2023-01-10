@@ -51,6 +51,11 @@
                 <label class="mb-3">احجام</label>
                 <select class="form-control colors" multiple="multiple" name="size[]" id=""></select>
             </div>
+
+            <div class="mb-3">
+                <label for="formFile" class="form-label">صور المنتج</label>
+                <input name="images[]" multiple class="form-control dropify rounded" data-default-image ="" type="file" id="formFile">
+              </div>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
     </div>

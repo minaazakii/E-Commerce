@@ -4,14 +4,17 @@ namespace App\Repository;
 
 use App\Models\Product;
 use App\Models\ProductColor;
+use App\Models\ProductImage;
+use App\Utils\ImageUpload;
 
 class ProductRepository implements RepositoryInterface
 {
     private $product;
-    private $productColor;
-    public function __construct(Product $product)
+    private $productImages;
+    public function __construct(Product $product,ProductImage $productImages)
     {
         $this->product = $product;
+        $this->productImages = $productImages;
     }
 
     public function getAll()
@@ -26,6 +29,17 @@ class ProductRepository implements RepositoryInterface
     {
         $product = $this->product->create($param);
         return $product;
+    }
+    public function addImages($images=[],$product_id)
+    {
+        foreach($images as $image)
+        {
+            $this->productImages->create(
+                [
+                    'product_id' => $product_id,
+                    'image' => ImageUpload::uploadImage($image)
+                ]);
+        }
     }
 
 	public function update($id, $param)
