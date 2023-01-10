@@ -44,7 +44,12 @@
 
             <div class="mb-3">
                 <label class="mb-3">الالوان</label>
-                <select class="form-control  colors" multiple="multiple" name="colors[]" id=""></select>
+                <select class="form-control colors" multiple="multiple" name="color[]" id=""></select>
+            </div>
+
+            <div class="mb-3">
+                <label class="mb-3">احجام</label>
+                <select class="form-control colors" multiple="multiple" name="size[]" id=""></select>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>

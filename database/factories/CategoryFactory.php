@@ -19,7 +19,7 @@ class CategoryFactory extends Factory
         return [
             'name'=>$this->faker->name,
             'image'=>$this->faker->text,
-            'parent_id'=>null
+            'parent_id'=>0
         ];
     }
 }

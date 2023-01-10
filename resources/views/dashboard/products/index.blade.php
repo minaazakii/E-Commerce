@@ -29,7 +29,7 @@
                     <td>{{ $product->category->name }}</td>
                     <td>{{ $product->price }}</td>
                     <td>{{ $product->discount_price }}</td>
-                    <td>{{ $product->productColor->count() }}</td>
+                    <td>{{ count($product->color)  }}</td>
                     <td>
                         <button class="btn btn-primary">Edit</button>
                     </td>
