@@ -41,8 +41,22 @@
                 <label class="mb-3">التخفيض</label>
                 <input name="discount_price" class="form-control" type="text" name="" id="">
             </div>
+
+            <div class="mb-3">
+                <label class="mb-3">الالوان</label>
+                <select class="form-control  colors" multiple="multiple" name="colors[]" id=""></select>
+            </div>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
     </div>
    </div>
 @endsection
+
+@push('script')
+<script>
+    $('.colors').select2(
+        {
+            tags:true
+        })
+</script>
+@endpush

@@ -3,13 +3,16 @@
 namespace App\Repository;
 
 use App\Models\Product;
+use App\Models\ProductColor;
 
 class ProductRepository implements RepositoryInterface
 {
     private $product;
-    public function __construct(Product $product)
+    private $productColor;
+    public function __construct(Product $product,ProductColor $productColor)
     {
         $this->product = $product;
+        $this->productColor = $productColor;
     }
 
     public function getAll()
@@ -25,6 +28,15 @@ class ProductRepository implements RepositoryInterface
         $product = $this->product->create($param);
         return $product;
     }
+    public function addColor($product, $colors=[])
+    {
+        foreach ($colors as $color)
+        {
+            $this->productColor->create(['product_id'=>$product->id, 'color'=>$color]);
+        }
+
+    }
+
 	public function update($id, $param)
     {
         $product = $this->getById($id);

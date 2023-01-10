@@ -30,7 +30,13 @@ class ProductService
         {
             $param['image'] = ImageUpload::uploadImage($param['image']);
         }
-        return $this->productRepo->store($param);
+        $product = $this->productRepo->store($param);
+
+        if(isset($param['colors']))
+        {
+            $this->productRepo->addColor($product, $param['colors']);
+        }
+
     }
     public function update($id, $param)
     {
