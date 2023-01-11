@@ -16,6 +16,7 @@ class ProductService
         $this->productRepo = $productRepository;
     }
 
+    
     public function getAll()
     {
         return $this->productRepo->getAll();

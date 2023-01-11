@@ -21,7 +21,7 @@ class ProductFactory extends Factory
             'description'=>$this->faker->sentence,
             'price'=>$this->faker->randomFloat(1,60,100),
             'image'=>$this->faker->image,
-            'category_id'=>11,
+            'category_id'=>1,
             'discount_price'=>$this->faker->randomFloat(1,1,50)
         ];
     }

@@ -33,6 +33,7 @@ class ProductStoreRequest extends FormRequest
             'color'=>'array|nullable',
             'size'=>'array|nullable',
             'images'=>'array|nullable',
+            'quantity'=>'numeric'
         ];
     }
 }

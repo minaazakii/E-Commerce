@@ -53,6 +53,11 @@
             </div>
 
             <div class="mb-3">
+                <label>الكميه</label>
+                <input type="text" name="quantity" class="form-control">
+            </div>
+
+            <div class="mb-3">
                 <label for="formFile" class="form-label">صور المنتج</label>
                 <input name="images[]" multiple class="form-control dropify rounded" data-default-image ="" type="file" id="formFile">
               </div>
